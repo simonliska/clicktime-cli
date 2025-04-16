@@ -4,9 +4,16 @@ Interactive prompt for time tracking in ClickUp
 ### Motivation 
 Main motivation for me was to save some time
 
-### Config 
-- Get ClickUP API key: Setting -> Apps
-- Get `team-id` aka `Workspace ID`: Can be accessed at any time from your URL (app.clickup.com/'workspace_id')
+### Install
+- Install Go: https://go.dev/doc/install
+- Install `clicktime-cli`:
+```sh
+go install github.com/simonliska/clicktime-cli@latest
+```
+- Run `clicktime-cli`
+- On first run you will be prompted for: 
+- `ClickUP API key`: ClickUp Setting -> Apps
+- `team-id` aka `workspace-id`: ClickUp URL: https://app.clickup.com/'workspace_id'
 
 ### Demo
 ![](./docs/demo.gif)

@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 
 	"github.com/manifoldco/promptui"
 )
@@ -169,9 +169,9 @@ func main() {
 		return
 	}
 
-	fmt.Printf("Using ClickUp API with Team ID: %s, Email: %s\n", config.TeamID, config.Email)
+	//fmt.Printf("Using ClickUp API with Workspace ID: %s, Email: %s\n", config.TeamID, config.Email)
 
-	// Continue with the existing flow, but use config values instead of constants
+	// Continue with the existing flow, but use config valuesF instead of constants
 	spaces := fetchSpaces(config.APIKey, config.TeamID)
 
 	// Space selection prompt
@@ -193,15 +193,15 @@ func main() {
 	}
 
 	selectedSpace := spaces[spaceIndex]
-	fmt.Printf("Selected space: %s (ID: %s)\n", selectedSpace.Name, selectedSpace.ID)
+	fmt.Printf("Selected space: %s \n", selectedSpace.Name)
 
 	// Fetch folders for the selected space
 	folders := fetchFolders(config.APIKey, selectedSpace.ID)
 
 	// Folder selection prompt
 	folderPrompt := promptui.Select{
-		Label: "Select a Folder",
-		Items: folders,
+		Label:    "Select a Folder",
+		Items:    folders,
 		HideHelp: true,
 		Templates: &promptui.SelectTemplates{
 			Label:    "{{ . }}",
@@ -218,15 +218,15 @@ func main() {
 	}
 
 	selectedFolder := folders[folderIndex]
-	fmt.Printf("Selected folder: %s (ID: %s)\n", selectedFolder.Name, selectedFolder.ID)
+	fmt.Printf("Selected folder: %s \n", selectedFolder.Name)
 
 	// Fetch lists for the selected folder
 	lists := fetchLists(config.APIKey, selectedFolder.ID)
 
 	// List selection prompt
 	listPrompt := promptui.Select{
-		Label: "Select a List",
-		Items: lists,
+		Label:    "Select a List",
+		Items:    lists,
 		HideHelp: true,
 		Templates: &promptui.SelectTemplates{
 			Label:    "{{ . }}",
@@ -243,7 +243,7 @@ func main() {
 	}
 
 	selectedList := lists[listIndex]
-	fmt.Printf("Selected list: %s (ID: %s)\n", selectedList.Name, selectedList.ID)
+	fmt.Printf("Selected list: %s\n", selectedList.Name)
 
 	// Fetch all tasks
 	tasks := fetchAllTasks(config.APIKey, selectedList.ID)
@@ -269,8 +269,8 @@ func main() {
 	for {
 		// Task selection prompt
 		taskPrompt := promptui.Select{
-			Label: "Select a Task",
-			Items: myTasks,
+			Label:    "Select a Task",
+			Items:    myTasks,
 			HideHelp: true,
 			Templates: &promptui.SelectTemplates{
 				Label:    "{{ . }}",
@@ -288,13 +288,12 @@ func main() {
 
 		selectedTask := myTasks[taskIndex]
 		fmt.Printf("\nSelected task: %s\n", selectedTask.Name)
-		fmt.Printf("Status: %s\n", selectedTask.Status.Status)
 		fmt.Printf("URL: %s\n", selectedTask.URL)
 
 		// Prompt for duration in hours
 		durationPrompt := promptui.Prompt{
-			Label:    "Duration (in hours)",
-			Default:  "1",
+			Label:   "Duration (in hours, 0.5 is 30min.)",
+			Default: "1",
 			Validate: func(input string) error {
 				_, err := strconv.ParseFloat(input, 64)
 				if err != nil {
