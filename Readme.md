@@ -13,7 +13,8 @@ go install github.com/simonliska/clicktime-cli@latest
 - Run `clicktime-cli`
 - On first run you will be prompted for: 
 - `ClickUP API key`: ClickUp Setting -> Apps
-- `team-id` aka `workspace-id`: ClickUp URL: https://app.clickup.com/'workspace_id'
+- `team-id` aka `workspace-id`: From ClickUp URL: https://app.clickup.com/'your_workspace_id'
+- `email`: for filtering assigned tasks
 
 ### Demo
 ![](./docs/demo.gif)
