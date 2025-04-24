@@ -1,5 +1,5 @@
 ### clicktime-cli
-Interactive prompt for time tracking in ClickUp
+Unofficial interactive prompt for time tracking in ClickUp
 
 ### Motivation 
 Main motivation for me was to save some time
