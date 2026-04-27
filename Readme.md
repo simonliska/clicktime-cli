@@ -10,9 +10,10 @@ Main motivation for me was to save some time
 ```sh
 go install github.com/simonliska/clicktime-cli@latest
 ```
-- Run `clicktime-cli`
+- Run `clicktime-cli --version` to verify installation
+- Run `clicktime-cli` to start tracking time
 - On first run you will be prompted for: 
-- `ClickUP API key`: ClickUp Setting -> Apps
+- `ClickUP API key`: ClickUp Setting -> ClickUP API
 - `team-id` aka `workspace-id`: From ClickUp URL: https://app.clickup.com/'your_workspace_id'
 - `email`: for filtering assigned tasks
 

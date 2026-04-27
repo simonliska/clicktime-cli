@@ -14,6 +14,8 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
+const Version = "0.1.0"
+
 type Config struct {
 	APIKey string `json:"api_key"`
 	TeamID string `json:"team_id"`
@@ -162,6 +164,12 @@ func createRequest(method, url string, body io.Reader, apiKey string) (*http.Req
 }
 
 func main() {
+	// Check for version flag
+	if len(os.Args) > 1 && os.Args[1] == "--version" {
+		fmt.Printf("clicktime-cli %s\n", Version)
+		return
+	}
+
 	// Load or create configuration
 	config, err := loadConfig()
 	if err != nil {
